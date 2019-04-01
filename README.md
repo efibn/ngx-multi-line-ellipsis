@@ -1,6 +1,8 @@
 # ngx-multi-line-ellipsis
 
-Angular directive for multi-line ellipsis 
+Angular directive for multi-line ellipsis.
+
+This fork is for update ellipsis on window resize events.
 
 ## Getting Started
 
@@ -46,6 +48,7 @@ The above div width is 250px
 ## Contributing
 
 [CONTRIBUTING.md]() will be added to project as soon as it exists
+
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/moonykolo/ngx-multi-line-ellipsis/tags). 
@@ -53,6 +56,8 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Authors
 
 * **moony kolo** - *Initial work* - [moonykolo](https://github.com/moonykolo)
+
+* **David Peris Martinez** - *Fork work* - [davidperis92](https://github.com/davidperis92)
 
 ## License
 

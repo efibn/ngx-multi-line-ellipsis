@@ -11,22 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moonykolo/ngx-multi-line-ellipsis.git"
+    "url": "git+https://github.com/davidperis92/ngx-multi-line-ellipsis.git"
   },
-  "author": "https://github.com/moonykolo",
+  "author": "https://github.com/davidperis92",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moonykolo/ngx-multi-line-ellipsis/issues"
+    "url": "https://github.com/davidperis92/ngx-multi-line-ellipsis/issues"
   },
-  "homepage": "https://github.com/moonykolo/ngx-multi-line-ellipsis#readme",
+  "homepage": "https://github.com/davidperis92/ngx-multi-line-ellipsis#readme",
   "devDependencies": {
-    "@angular/compiler": "^5.2.10",
-    "@angular/compiler-cli": "^5.2.10",
-    "@angular/core": "^5.2.10",
-    "rollup": "^0.58.2",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "rxjs": "^6.0.0",
-    "typescript": "^2.8.3",
-    "uglify-js": "^3.3.23"
+    "@angular/compiler": "^5.2.11",
+    "@angular/compiler-cli": "^5.2.11",
+    "@angular/core": "^5.2.11",
+    "rollup": "^1.7.4",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rxjs": "^6.4.0",
+    "typescript": "^2.8.4",
+    "uglify-js": "^3.5.3"
   }
 }
