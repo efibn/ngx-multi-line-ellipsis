@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, AfterViewInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, AfterViewInit, Renderer2, HostListener } from '@angular/core'; 
 
 @Directive({
   selector: '[ngxEllipsis]'
@@ -6,29 +6,49 @@ import { Directive, ElementRef, Input, AfterViewInit, Renderer2 } from '@angular
 export class NgxMultiLineEllipsisDirective implements AfterViewInit {
 
   @Input() lines: number;
+  private text: string;
+  private width = 0;
+  private readonly OFFSET_WIDTH = 7; // There are some cases that text overflows container 
 
   constructor(
     private el: ElementRef,
     private renderer: Renderer2
   ) { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    if (this.width !== this.getElementWidth()) {
+      this.initEllipsis();
+    }
+  }
+
   ngAfterViewInit(): void {
+    this.text = this.el.nativeElement.innerHTML.trim();
+    this.initEllipsis();
+  }
+
+  getElementWidth(): number {
+    return this.el.nativeElement.clientWidth - this.OFFSET_WIDTH;
+  }
+
+  initEllipsis() {
+    const element = this.el.nativeElement;
 
     // Get element font size
     const elementFontSize =
-      parseInt(this.getCssproperty(this.el.nativeElement, 'font-size')
+      parseInt(this.getCssProperty(element, 'font-size')
         .split('px')[0], 10);
 
     // Get element font family
     const elementFontFamily =
-      this.getCssproperty(this.el.nativeElement, 'font-family')
+      this.getCssProperty(element, 'font-family')
         .split(',')[0];
 
     // Get element width
-    const originalElementWidth = this.el.nativeElement.clientWidth;
+    this.width = this.getElementWidth();
 
     // Remove the element from DOM
-    this.renderer.setStyle(this.el.nativeElement, 'display', 'none');
+    this.renderer.setStyle(element, 'display', 'none');
 
     // Create a canvas element so it'd be possiable to measure expected width
     const canvas = this.renderer.createElement('canvas');
@@ -38,7 +58,7 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
     canvasContext.font = `${elementFontSize}px ${elementFontFamily}`;
 
     // Get element original text (will be replaced in future code lines)
-    const elementOriginalText = this.el.nativeElement.innerHTML.trim();
+    const elementOriginalText = this.text;
 
     // Init final top element text
     let topElementTextLines = '';
@@ -52,7 +72,7 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
     let finishLoop = false;
 
     // A veriable that holds current width (top element)
-    let currentTopElemetWidth = 0;
+    let currentTopElementWidth = 0;
 
     // A veriable that holds last text that has only complete words in it
     // to aviod white spaces breaks
@@ -67,11 +87,9 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
 
       // Checks if current width is smaller than
       // the max width for line times the lines to display minus one
-      if (currentTopElemetWidth < (originalElementWidth * (this.lines - 1)) &&
-        !hasReachedLimit) {
-
-        // Save the current text as previos text
-        const previosText = topElementTextLines;
+      if (currentTopElementWidth < (this.width * (this.lines - 1)) && !hasReachedLimit) {
+        // Save the current text as previous text
+        const previousText = topElementTextLines;
 
         // If the current char is 'Space' then it saves the current text
         // as it has only complete words
@@ -81,20 +99,19 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
         }
 
         // Add current char to current text
-        topElementTextLines =
-          topElementTextLines + elementOriginalText.charAt(i);
+        topElementTextLines += elementOriginalText.charAt(i);
 
         // Get the new current element width
-        currentTopElemetWidth += canvasContext.measureText(allLetters[i]).width;
+        currentTopElementWidth += canvasContext.measureText(allLetters[i]).width;
 
         if (elementOriginalText.charAt(i) &&
           elementOriginalText.charAt(i) === '\n') {
-          currentTopElemetWidth -= canvasContext.measureText(allLetters[i]).width;
+          currentTopElementWidth -= canvasContext.measureText(allLetters[i]).width;
         }
 
         // Checks if current width is bigger or equal to
         // the max width for line times the lines to display minus one
-        if (currentTopElemetWidth >= (originalElementWidth * (this.lines - 1))) {
+        if (currentTopElementWidth >= (this.width * (this.lines - 1))) {
 
           // If the current char is 'Space' it gets
           // the previos text as the final text
@@ -102,7 +119,7 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
             elementOriginalText.charAt(i) === ' ') {
 
             // Set previos text as the current element final text
-            topElementTextLines = previosText;
+            topElementTextLines = previousText;
 
             // Set the ellipsis text line with it's first char
             ellipsisTextLine = elementOriginalText.charAt(i);
@@ -114,9 +131,9 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
             topElementTextLines = completeWordsText;
 
             // Get the previos text (to get the last word taht we didn't included)
-            const previosTextSplitBySpaces = previosText.split(' ');
+            const previousTextSplitBySpaces = previousText.split(' ');
             const previosLetter =
-              previosTextSplitBySpaces[previosTextSplitBySpaces.length - 1] +
+              previousTextSplitBySpaces[previousTextSplitBySpaces.length - 1] +
               elementOriginalText.charAt(i);
 
             ellipsisTextLine = previosLetter;
@@ -142,9 +159,9 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
         ellipsisTextLine = ellipsisTextLine + elementOriginalText.charAt(i);
 
         // Get the new current element width
-        currentTopElemetWidth += canvasContext.measureText(allLetters[i]).width;
+        currentTopElementWidth += canvasContext.measureText(allLetters[i]).width;
 
-        if ((originalElementWidth * this.lines) - currentTopElemetWidth < -100 ) {
+        if ((this.width * this.lines) - currentTopElementWidth < -100) {
           finishLoop = true;
         }
       }
@@ -155,7 +172,7 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
     const topText = this.renderer.createText(topElementTextLines.trim());
     this.renderer.appendChild(topTextDiv, topText);
 
-    // Create the ellipsis elemet to append
+    // Create the ellipsis element to append
     const ellipsisDiv = this.renderer.createElement('div');
     const ellipsisText = this.renderer.createText(ellipsisTextLine.trim());
 
@@ -165,14 +182,14 @@ export class NgxMultiLineEllipsisDirective implements AfterViewInit {
     this.renderer.appendChild(ellipsisDiv, ellipsisText);
 
     // Append both elements to the original element
-    this.el.nativeElement.innerHTML = '';
-    this.renderer.appendChild(this.el.nativeElement, topTextDiv);
-    this.renderer.appendChild(this.el.nativeElement, ellipsisDiv);
+    element.innerHTML = '';
+    this.renderer.appendChild(element, topTextDiv);
+    this.renderer.appendChild(element, ellipsisDiv);
 
-    this.renderer.setStyle(this.el.nativeElement, 'display', 'block');
+    this.renderer.setStyle(element, 'display', 'block');
   }
 
-  getCssproperty(element: Element, property: string) {
+  getCssProperty(element: Element, property: string) {
     return getComputedStyle(element, null).getPropertyValue(property);
   }
 }
