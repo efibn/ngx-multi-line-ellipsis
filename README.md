@@ -9,13 +9,15 @@ This fork is for update ellipsis on window resize events.
 ### Installing
 
 Install the plugin with npm:
+
 ```shell
-$ npm install --save ngx-multi-line-ellipsis
+$ npm install --save @davidperis92/ngx-multi-line-ellipsis
 ```
 
 Add to your angular module:
 ```javascript
-import { NgxMultiLineEllipsisModule } from "ngx-multi-line-ellipsis";
+
+import { NgxMultiLineEllipsisModule } from "@davidperis92/ngx-multi-line-ellipsis";
 
 @NgModule({
     imports: [
@@ -51,7 +53,7 @@ The above div width is 250px
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/moonykolo/ngx-multi-line-ellipsis/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/davidperis92/ngx-multi-line-ellipsis/tags).
 
 ## Authors
 

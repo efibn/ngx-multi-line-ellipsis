@@ -1,10 +1,7 @@
 {
   "name": "@davidperis92/ngx-multi-line-ellipsis",
-  "version": "1.0.0",
-  "description": "",
-  "files": [
-    "dist"
-  ],
+  "version": "1.0.7",
+  "description": "Angular directive for multi-line ellipsis.",
   "main": "index.ts",
   "scripts": {
     "transpile": "ngc",
@@ -12,6 +9,13 @@
     "minify": "uglifyjs dist/bundles/ngx-multi-line-ellipsis.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ngx-multi-line-ellipsis.umd.min.js",
     "build": "npm run transpile && npm run package && npm run minify"
   },
+  "keywords": [
+    "multi",
+    "line",
+    "ellipsis",
+    "angular",
+    "angular5"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidperis92/ngx-multi-line-ellipsis.git"
