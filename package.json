@@ -1,7 +1,7 @@
 {
-  "name": "@davidperis92/ngx-multi-line-ellipsis",
-  "version": "1.0.8",
-  "description": "Angular directive for multi-line ellipsis.",
+  "name": "ngx-multi-line-ellipsis-wrapper",
+  "version": "9.0.1",
+  "description": "Angular directive for multi-line ellipsis. Support Angular 9.0.1",
   "main": "index.ts",
   "scripts": {
     "transpile": "ngc",
@@ -19,18 +19,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidperis92/ngx-multi-line-ellipsis.git"
+    "url": "git+https://github.com/efibn/ngx-multi-line-ellipsis.git"
   },
-  "author": "https://github.com/davidperis92",
+  "author": "https://github.com/efibn",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/davidperis92/ngx-multi-line-ellipsis/issues"
+    "url": "https://github.com/efibn/ngx-multi-line-ellipsis-wrapper/issues"
   },
-  "homepage": "https://github.com/davidperis92/ngx-multi-line-ellipsis#readme",
+  "homepage": "https://github.com/efibn/ngx-multi-line-ellipsis-wrapper#readme",
   "devDependencies": {
-    "@angular/compiler": "^5.2.11",
-    "@angular/compiler-cli": "^5.2.11",
-    "@angular/core": "^5.2.11",
+    "@angular/compiler": "^9.0.1",
+    "@angular/compiler-cli": "^9.0.1",
+    "@angular/core": "^9.0.1",
     "rollup": "^1.7.4",
     "rollup-plugin-node-resolve": "^4.0.1",
     "rxjs": "^6.4.0",
