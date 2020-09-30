@@ -11,7 +11,7 @@ This fork is for update ellipsis on window resize events.
 Install the plugin with npm:
 
 ```shell
-$ npm install --save @davidperis92/ngx-multi-line-ellipsis
+$ npm install --save ngx-multi-line-ellipsis-wrapper
 ```
 
 Add to your angular module:
