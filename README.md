@@ -1,4 +1,4 @@
-# ngx-multi-line-ellipsis
+# ngx-multi-line-ellipsis-wrapper
 
 Angular directive for multi-line ellipsis.
 
@@ -17,7 +17,7 @@ $ npm install --save ngx-multi-line-ellipsis-wrapper
 Add to your angular module:
 ```javascript
 
-import { NgxMultiLineEllipsisModule } from "@davidperis92/ngx-multi-line-ellipsis";
+import { NgxMultiLineEllipsisModule } from "ngx-multi-line-ellipsis-wrapper";
 
 @NgModule({
     imports: [
@@ -53,7 +53,7 @@ The above div width is 250px
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/davidperis92/ngx-multi-line-ellipsis/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/efibn/ngx-multi-line-ellipsis-wrapper/tags).
 
 ## Authors
 
