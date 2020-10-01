@@ -1,6 +1,6 @@
 {
     "name": "ngx-multi-line-ellipsis-wrapper",
-    "version": "9.0.3",
+    "version": "9.0.4",
     "description": "Angular directive for multi-line ellipsis. Support Angular 9.0.1",
     "main": "index.ts",
     "scripts": {
