@@ -3,7 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 export default {
     input: 'dist/index.js',
     output: {
-        file: 'dist/bundles/ngx-multi-line-ellipsis.umd.js',
+        file: 'dist/bundles/ngx-multi-line-ellipsis-wrapper.umd.js',
         globals: {
             '@angular/core': 'ng.core',
             'rxjs/Observable': 'Rx',
@@ -15,7 +15,7 @@ export default {
         },
         format: 'umd',
         sourceMap: false,
-        name: 'ngx.multi.line.ellipsis'
+        name: 'ngx.multi.line.ellipsis.wrapper'
     },
     plugins: [
         resolve({
